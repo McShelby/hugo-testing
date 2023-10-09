@@ -1,0 +1,10 @@
+{{- $page := .Page }}
+{{- $content := .Text }}
+{{- $url := .Destination }}
+{{- $title := .Title | default "" }}
+{{- $title = trim $title " " }}
+{{- $target := "" }}
+{{- if or (strings.HasPrefix $url "http://") (strings.HasPrefix $url "https://") }}
+  {{- $target = "_blank" }}
+{{- end -}}
+<a href="{{ $url | safeURL }}"{{ if $title }} title="{{ $title }}"{{ end }}{{ if gt (len $target) 0 }} target="{{ $target }}"{{ end }}>{{ $content | safeHTML }}</a>
